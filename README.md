@@ -230,7 +230,4 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
 - **Zabbix/Nagios**: Untuk monitoring jaringan.
 - **OpenSSL**: Untuk konfigurasi SSL di server.
 
-## Kesimpulan
-Dengan mengikuti langkah-langkah ini, Anda dapat membangun, mengamankan, dan menguji jaringan berdasarkan topologi yang diberikan sesuai dengan standar keamanan ISO 27001:2022.
-
 
