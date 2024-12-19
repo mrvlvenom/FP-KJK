@@ -37,7 +37,7 @@ B. Tugas
 
 ## Topology
 
-![alt text](/img/topology.png)
+![alt text](https://github.com/mrvlvenom/FP-KJK/blob/main/img/Topologi.png)
 
 ### Prefix IP Kelompok 5 : 192.232
 
@@ -171,7 +171,7 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
   3. **Pengujian Konektivitas**:
      - Gunakan perintah `ping` antar perangkat untuk memastikan semua terhubung.
 
-     ![alt text](/img/ping1.png)
+     ![alt text](https://github.com/mrvlvenom/FP-KJK/blob/main/img/ping1.png)
 
 ### 2. Analisis Risiko Berdasarkan ISO 27001:2022
 - **Identifikasi Risiko**:
