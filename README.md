@@ -10,7 +10,7 @@ Kelompok 5
 | Rahmad Aji Wicaksono      | 5027221034 |
 | Ilhan Ahmad Syafa         | 5027221040 |
 | Muhammad Arsy Athallah    | 5027221048 |
-| Awang Fraditya            | 5027221033 |
+| Awang Fraditya            | 5027221055 |
 
 ## Daftar isi
 
