@@ -164,8 +164,6 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
 ## Solution
-Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
-
 ### 1. Simulasi Jaringan di GNS3
 - Langkah-langkah:
   1. **Membangun Topologi**:
