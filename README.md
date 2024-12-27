@@ -187,9 +187,6 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
 
 ### 2. Analisis Risiko Berdasarkan ISO 27001:2022
 - **Identifikasi Risiko**:
-  - **Akses Tidak Sah**:
-    - Potensi akses ilegal ke web server di Lt.6.
-    - Penggunaan WiFi tanpa otentikasi yang aman.
   - **Kegagalan Perangkat Keras**:
     - Router atau switch mengalami gangguan.
   - **Serangan Siber**:
@@ -207,35 +204,23 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
   1. **Firewall dan ACL (Access Control List)**:
      - Konfigurasikan firewall pada router untuk membatasi akses ke subnet tertentu.
      - Gunakan ACL untuk mengizinkan hanya lalu lintas tertentu ke server web.
-  2. **Enkripsi Jaringan**:
-     - Gunakan WPA3 untuk keamanan WiFi.
-     - Implementasikan VPN untuk koneksi eksternal ke jaringan internal.
-  3. **Segmentasi Jaringan**:
-     - Pisahkan jaringan kelas, lab, dan server menggunakan VLAN.
-  4. **Keamanan Server**:
-     - Instalasi sertifikat SSL untuk web server.
+  2. **Keamanan Server**:
      - Gunakan IDS/IPS (Intrusion Detection/Prevention System) pada server.
-  5. **Pemantauan Jaringan**:
-     - Gunakan tools seperti Zabbix atau Nagios untuk memonitor performa jaringan.
-  6. **Backup dan Recovery**:
+  3. **Backup dan Recovery**:
      - Siapkan backup konfigurasi router dan switch.
 
 ### 4. Simulasi Serangan Siber dan Pengujian Keamanan
 - **Serangan yang Disimulasikan**:
   - **Denial of Service (DoS)**:
-    - Gunakan alat seperti hping3 untuk mengirim lalu lintas palsu ke server.
+    - Gunakan alat seperti scapy untuk mengirim lalu lintas palsu ke server.
   - **MITM Attack**:
-    - Gunakan tool seperti ettercap untuk mencoba menyadap lalu lintas WiFi.
-  - **Brute Force**:
-    - Gunakan Hydra untuk mencoba akses brute force pada router.
+    - Gunakan tool seperti arp spoofing.
 - **Pengujian Mitigasi**:
   - Periksa apakah firewall mampu menahan serangan DoS.
-  - Uji apakah komunikasi terenkripsi pada WiFi tidak dapat disadap.
-  - Uji kekuatan password router dan server.
 - **Evaluasi Hasil**:
   - Bandingkan log sebelum dan sesudah teknik keamanan diterapkan untuk memastikan mitigasi berhasil.
 
-### 5. Implementasi Srangan ARP Spoofing dan Firewall dari Penyerang ke Web Server
+### 5. Implementasi Serangan ARP Spoofing dan Firewall dari Penyerang ke Web Server
 
 1. Setup Web Server:
 ### *Setup* Program pada *Web Server*
@@ -267,12 +252,12 @@ Kemudian jalankan command berikut:
 
 Dan Hasilnya seperti berikut:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/2.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/2.png)
 
 ### Hasil Pemantauan oleh Web Server
 Pantau *server* yang menjadi target penyerangan, apabila muncul *alert* seperti gambar di bawah ini maka program detektor berjalan dengan baik. 
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/3.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/3.png)
 
 Skrip secara otomatis memblokir alamat IP penyerang untuk mencegah penyebaran serangan lebih lanjut ke perangkat lain dalam jaringan.
 
@@ -281,17 +266,17 @@ Kemudian jalankan command berikut:
 
 kemudian menghasilkan sebagai berikut:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/4.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/4.png)
 
 Setelah itu penyerang tidak bisa mengirimkan packet ke Web Server, seperti hasil dibawah ini:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/5.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/5.png)
 
 Di lain sisi, client yang tidak menyerang bisa mengirimkan packet ke Web Server:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/6.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/6.png)
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/8.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/8.png)
 
 Kemudian bersihkan jaringan dari paket ARP berbahaya. Skrip memastikan tidak ada cache ARP yang terinfeksi pada perangkat, menggunakan alat seperti perintah “ARP Flush” untuk membersihkan cache pada setiap node.
 Kemudian jalankan command berikut:
@@ -299,18 +284,14 @@ Kemudian jalankan command berikut:
 
 untuk membersihkan penyerang yang sudah terdeteksi oleh web server. Kemudian bisa mengirimkan packet dengan normal:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/9.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/9.png)
 
 Dari program python tadi, hasil dari programnya akan dimasukkan ke dalam log.txt, seperti pada gambar:
 
-![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/7.png)
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/7.png)
 
 
 ### Tools yang Dibutuhkan
 - **GNS3**: Untuk simulasi jaringan.
-- **Wireshark**: Untuk analisis lalu lintas jaringan.
-- **hping3** dan **ettercap**: Untuk simulasi serangan.
-- **Zabbix/Nagios**: Untuk monitoring jaringan.
-- **OpenSSL**: Untuk konfigurasi SSL di server.
-
+- **Scapy** dan **ARP Spoof**: Untuk simulasi serangan.
 
