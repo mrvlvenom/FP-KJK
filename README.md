@@ -79,6 +79,18 @@ iface eth0 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
+- Penyerang (Lt.6 Perpustakaan)
+
+```bash
+auto eth0
+iface eth0 inet static
+  address 192.232.1.3
+  netmask 255.255.255.0
+  gateway 192.232.1.1
+
+up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
 - Kelas 702 (40 host)
 
 ```bash
@@ -222,6 +234,77 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
   - Uji kekuatan password router dan server.
 - **Evaluasi Hasil**:
   - Bandingkan log sebelum dan sesudah teknik keamanan diterapkan untuk memastikan mitigasi berhasil.
+
+### 5. Implementasi Srangan ARP Spoofing dan Firewall dari Penyerang ke Web Server
+
+1. Setup Web Server:
+### *Setup* Program pada *Web Server*
+Lakukan instalasi berikut pada setiap *server*:
+- Install Python: `sudo apt install python3 python3-pip python3-venv -y`
+- Install pip: `sudo apt install python3-pip -y`
+- Install scapy: `pip3 install scapy`
+
+### *Setup* Pada *Client Penyerang*
+Lakukan instalasi berikut pada device penyerang:
+- Install dsniff: `sudo apt install dsniff`
+
+## Identification
+Skrip deteksi memantau lalu lintas jaringan secara real-time untuk mengidentifikasi anomali ARP Spoofing, seperti perubahan alamat MAC yang tidak sesuai. Ketika anomali terdeteksi, insiden dicatat secara detail, termasuk alamat IP, MAC Address, waktu kejadian.
+
+### Setup Program Python pada Web Server
+Kemudian buatlah suatu *file* python pada Web Server yang berisi program [berikut](https://github.com/mrvlvenom/FP-KJK/blob/main/arp.py)
+
+Kemudian jalankan command berikut:
+`python3 [nama_program_python]`
+
+Kemudian mendapatkan output sebagai berikut:
+
+![image](https://github.com/mrvlvenom/FP-KJK/blob/main/img/1.png)
+
+### Setup Client Penyerang
+Kemudian jalankan command berikut:
+`arpspoof -i [interface] -t [IP target] -r [IP host/router]`
+
+Dan Hasilnya seperti berikut:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/2.png)
+
+### Hasil Pemantauan oleh Web Server
+Pantau *server* yang menjadi target penyerangan, apabila muncul *alert* seperti gambar di bawah ini maka program detektor berjalan dengan baik. 
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/3.png)
+
+Skrip secara otomatis memblokir alamat IP penyerang untuk mencegah penyebaran serangan lebih lanjut ke perangkat lain dalam jaringan.
+
+Kemudian jalankan command berikut:
+`iptables -L -v`
+
+kemudian menghasilkan sebagai berikut:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/4.png)
+
+Setelah itu penyerang tidak bisa mengirimkan packet ke Web Server, seperti hasil dibawah ini:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/5.png)
+
+Di lain sisi, client yang tidak menyerang bisa mengirimkan packet ke Web Server:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/6.png)
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/8.png)
+
+Kemudian bersihkan jaringan dari paket ARP berbahaya. Skrip memastikan tidak ada cache ARP yang terinfeksi pada perangkat, menggunakan alat seperti perintah “ARP Flush” untuk membersihkan cache pada setiap node.
+Kemudian jalankan command berikut:
+`iptables -F`
+
+untuk membersihkan penyerang yang sudah terdeteksi oleh web server. Kemudian bisa mengirimkan packet dengan normal:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/9.png)
+
+Dari program python tadi, hasil dari programnya akan dimasukkan ke dalam log.txt, seperti pada gambar:
+
+![image](https://github.com/mrvlvenom/FP_Manin/blob/main/img/7.png)
+
 
 ### Tools yang Dibutuhkan
 - **GNS3**: Untuk simulasi jaringan.
