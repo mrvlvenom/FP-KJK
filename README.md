@@ -222,8 +222,7 @@ Dibawah ini masih analisis sementara kami untuk menyelesaikan case soal diatas.
 
 ### 5. Implementasi Serangan ARP Spoofing dan Firewall dari Penyerang ke Web Server
 
-1. Setup Web Server:
-### *Setup* Program pada *Web Server*
+### *Setup* pada *Web Server*
 Lakukan instalasi berikut pada setiap *server*:
 - Install Python: `sudo apt install python3 python3-pip python3-venv -y`
 - Install pip: `sudo apt install python3-pip -y`
